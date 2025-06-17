@@ -9,7 +9,7 @@ const app = express();
 app.use(cors({
   origin: function(origin, callback) {
     // Allow any origin that matches your IP address with any port
-    if (!origin || origin.startsWith('http://192.168.1.58:') || origin === 'http://localhost:3000' || origin === 'https://www.pendik-ortodonti.com') {
+    if (!origin || origin.startsWith('http://192.168.1.58:') || origin === 'http://localhost:3000' || origin === 'https://www.pendik-ortodonti.com' || origin === 'https://pendik-ortodonti.com') {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
