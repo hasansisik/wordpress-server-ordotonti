@@ -101,6 +101,14 @@ const HeaderSchema = new mongoose.Schema(
       type: String,
       default: "/",
     },
+    secondActionButtonText: {
+      type: String,
+      default: "Kayıt Ol",
+    },
+    secondActionButtonLink: {
+      type: String,
+      default: "/register",
+    },
     headerComponent: {
       type: String,
       default: "Header1",
@@ -152,6 +160,14 @@ const HeaderSchema = new mongoose.Schema(
     secondButtonBorderColor: {
       type: String,
       default: "#3b71fe", // Default second button border color
+    },
+    showDestinationsDropdown: {
+      type: Boolean,
+      default: false, // Default is hidden
+    },
+    destinationsCategories: {
+      type: Array,
+      default: [], // Default is empty array
     }
   },
   { timestamps: true }

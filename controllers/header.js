@@ -27,6 +27,8 @@ const updateHeader = async (req, res) => {
     showSecondActionButton,
     actionButtonText,
     actionButtonLink,
+    secondActionButtonText,
+    secondActionButtonLink,
     headerComponent,
     workingHours,
     topBarColor,
@@ -39,7 +41,9 @@ const updateHeader = async (req, res) => {
     buttonTextColor,
     secondButtonColor,
     secondButtonTextColor,
-    secondButtonBorderColor
+    secondButtonBorderColor,
+    showDestinationsDropdown,
+    destinationsCategories
   } = req.body;
   
   // Get the current header or create one if it doesn't exist
@@ -59,6 +63,20 @@ const updateHeader = async (req, res) => {
   if (showSecondActionButton !== undefined) header.showSecondActionButton = showSecondActionButton;
   if (actionButtonText) header.actionButtonText = actionButtonText;
   if (actionButtonLink) header.actionButtonLink = actionButtonLink;
+  if (secondActionButtonText) {
+    header.secondActionButtonText = secondActionButtonText;
+    // Also update the nested structure for consistency
+    if (!header.links) header.links = {};
+    if (!header.links.secondActionButton) header.links.secondActionButton = {};
+    header.links.secondActionButton.text = secondActionButtonText;
+  }
+  if (secondActionButtonLink) {
+    header.secondActionButtonLink = secondActionButtonLink;
+    // Also update the nested structure for consistency
+    if (!header.links) header.links = {};
+    if (!header.links.secondActionButton) header.links.secondActionButton = {};
+    header.links.secondActionButton.href = secondActionButtonLink;
+  }
   if (headerComponent) header.headerComponent = headerComponent;
   if (workingHours) header.workingHours = workingHours;
   if (topBarColor) header.topBarColor = topBarColor;
@@ -72,6 +90,8 @@ const updateHeader = async (req, res) => {
   if (secondButtonColor) header.secondButtonColor = secondButtonColor;
   if (secondButtonTextColor) header.secondButtonTextColor = secondButtonTextColor;
   if (secondButtonBorderColor) header.secondButtonBorderColor = secondButtonBorderColor;
+  if (showDestinationsDropdown !== undefined) header.showDestinationsDropdown = showDestinationsDropdown;
+  if (destinationsCategories) header.destinationsCategories = destinationsCategories;
   
   await header.save();
   
